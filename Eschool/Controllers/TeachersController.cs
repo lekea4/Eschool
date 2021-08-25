@@ -103,5 +103,12 @@ namespace Eschool.Controllers
         {
             return _context.Teachers.Any(e => e.Id == id);
         }
+
+        //GET: api/teachers?firstName=FirstNameVal&lastName=lastNameVal
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Teacher>>> GetTeacherWithFilters([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            return await _context.Teachers.Where(t => t.FirstName == firstName && t.LastName == lastName).ToListAsync();
+        }
     }
 }

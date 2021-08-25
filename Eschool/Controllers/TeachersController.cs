@@ -51,6 +51,15 @@ namespace Eschool.Controllers
                 return BadRequest();
             }
 
+            //Obtain a reference to the teacher to be updated  
+
+            Teacher teacherToBeUpdated = _context.Teachers.Find(id);
+
+            //Change only properties that are not null
+
+            if (teacher.FirstName != null) teacherToBeUpdated.FirstName = teacher.FirstName;
+            if (teacher.LastName != null) teacherToBeUpdated.LastName = teacher.LastName;
+
             _context.Entry(teacher).State = EntityState.Modified;
 
             try
